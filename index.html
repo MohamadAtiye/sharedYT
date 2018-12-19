@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>MidoKing's YouTube</title>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <style></style>
+    <script src="js/libs/socket.io.js"></script>
+    <script src="js/videoControl.js"></script>
+    <script src="js/socketHandler.js"></script>
+  </head>
+
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+
+    <!-- <br />
+    <button onclick="videoClass.playVideo()">Play</button>
+    <button onclick="videoClass.pauseVideo()">Pause</button> -->
+
+    <br />
+
+    Load video ( url / id ) <input id="videoIDBox" type="text" />
+    <button onclick="videoClass.loadVideo()">Load</button> <br />
+    <img id="thumber" /> <br />
+
+    Search fro video <input id="searchBox" type="text" />
+    <button onclick="videoClass.searchVideo()">Search</button>
+    <button onclick="videoClass.searchVideo(-1)">clear</button>
+
+    <div id="searchArea" style="width:640px"></div>
+
+    <br />
+  </body>
+</html>

@@ -1,0 +1,13 @@
+need nodejs installed in system
+
+first time, run:
+-> npm install
+this will install all dependancies form package.json
+
+then, open 
+
+start socket on 8081.bat
+
+then 
+
+start http on 8080.bat
