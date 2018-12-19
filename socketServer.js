@@ -14,6 +14,7 @@ server.listen(SOCKET_PORT, () => {
 // io.to(targetSocketID).emit("private", text); //==> send to person (same as room)
 
 let connectedPlayerSockets = [];
+let connectedPlayerNames = [];
 
 io.on("connection", function(socket) {
   console.log(socket.id, " connected");
@@ -44,9 +45,33 @@ io.on("connection", function(socket) {
   });
 
 
+  socket.on("setPlayerName", function(msg, callback) {
+    let newName = msg.name.trim();
+    if (connectedPlayerNames.includes(newName)){
+      callback({ok:false,error:"**name already in use"})
+    }
+    else if(newName.length < 5 || newName.length>30){
+      callback({ok:false,error:"**choose name between 5 and 30 characters"})
+    }
+    else{
+      socket.profile = {};
+      socket.profile.name = newName;
+      connectedPlayerSockets[socket.id] = socket;
+      connectedPlayerNames.push(newName);
+      callback({ok:true,error:"",newName:newName,id:socket.id});
+      console.log("new player received a name.",socket.id,newName)
+    }
+  });
 
   socket.on("disconnect", function() {
-    console.log(socket.id, " disconnected ");
+    console.log(socket.id,socket.profile.name, " disconnected ");
+
+    //-- remove name from used names list
+    var index = connectedPlayerNames.indexOf(socket.profile.name);
+    if (index > -1) {
+      connectedPlayerNames.splice(index, 1);
+    }
+
     //-- delete player socket
     delete connectedPlayerSockets[socket.id];
   });

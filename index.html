@@ -11,28 +11,81 @@
     <script src="js/libs/socket.io.js"></script>
     <script src="js/videoControl.js"></script>
     <script src="js/socketHandler.js"></script>
+    <script src="js/socialHandler.js"></script>
   </head>
 
   <body>
-    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-    <div id="player"></div>
+    <div id="videoPlayerArea" style="float: left">
+      <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+      <div id="player"></div>
 
-    <!-- <br />
+      <!-- <br />
     <button onclick="videoClass.playVideo()">Play</button>
     <button onclick="videoClass.pauseVideo()">Pause</button> -->
 
-    <br />
+      <br />
 
-    Load video ( url / id ) <input id="videoIDBox" type="text" />
-    <button onclick="videoClass.loadVideo()">Load</button> <br />
-    <img id="thumber" /> <br />
+      Load video ( url / id ) <input id="videoIDBox" type="text" />
+      <button onclick="videoClass.loadVideo()">Load</button> <br />
+      <img id="thumber" /> <br />
 
-    Search fro video <input id="searchBox" type="text" />
-    <button onclick="videoClass.searchVideo()">Search</button>
-    <button onclick="videoClass.searchVideo(-1)">clear</button>
+      Search for video <input id="searchBox" type="text" />
+      <button onclick="videoClass.searchVideo()">Search</button>
+      <button onclick="videoClass.searchVideo(-1)">clear</button>
 
-    <div id="searchArea" style="width:640px"></div>
+      <div id="searchArea" style="width:640px"></div>
 
-    <br />
+      <br />
+    </div>
+
+    <div id="userSocialArea" style="float: left">
+      <table>
+
+        <tr id="tr_name_1">
+          <td>Choose a name</td>
+          <td><input type="text" id="chosenNameBox" /></td>
+          <td>
+            <button style="width:100%" onclick="socialClass.setName()">
+              Set Name
+            </button>
+          </td>
+        </tr>
+
+        <tr id="tr_name_2">
+          <td colspan="3">
+            <div><label id="error_name" style="color:red"></label></div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <div id="publicRoomsList">
+              <hr />
+              this should be a list of available public room to choose from
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>join a room</td>
+          <td><input type="text" id="chosenRoomBox" /></td>
+          <td><button style="width:100%">Join</button></td>
+        </tr>
+
+        <tr>
+          <td colspan="3"><hr /></td>
+        </tr>
+
+        <tr>
+          <td>OR create a room</td>
+          <td><input type="text" id="createdRoomBox" /></td>
+          <td><button style="width:100%">Create</button></td>
+        </tr>
+      </table>
+
+      <hr />
+
+      <div id="publicRoomsList"></div>
+    </div>
   </body>
 </html>
