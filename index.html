@@ -40,7 +40,7 @@
 
     <div id="userSocialArea" style="float: left">
       <table>
-
+        <!-- ////////////////////////////////////////////////////// -->
         <tr id="tr_name_1">
           <td>Choose a name</td>
           <td><input type="text" id="chosenNameBox" /></td>
@@ -57,30 +57,35 @@
           </td>
         </tr>
 
-        <tr>
+        <!-- ////////////////////////////////////////////////////// -->
+        <tr id="tr_room_1">
           <td colspan="3">
             <div id="publicRoomsList">
               <hr />
-              this should be a list of available public room to choose from
+              {this should be a list of available public room to choose from}
             </div>
           </td>
         </tr>
 
-        <tr>
-          <td>join a room</td>
+        <tr id="tr_room_2">
+          <td>join/create a room</td>
           <td><input type="text" id="chosenRoomBox" /></td>
-          <td><button style="width:100%">Join</button></td>
+          <td>
+            <button style="width:100%" onclick="socialClass.joinRoom()">
+              Join
+            </button>
+          </td>
         </tr>
 
-        <tr>
-          <td colspan="3"><hr /></td>
+        
+        <tr id="tr_room_3">
+          <td colspan="3">
+            <div><label id="error_room" style="color:red"></label></div>
+          </td>
         </tr>
 
-        <tr>
-          <td>OR create a room</td>
-          <td><input type="text" id="createdRoomBox" /></td>
-          <td><button style="width:100%">Create</button></td>
-        </tr>
+
+        <!-- ////////////////////////////////////////////////////// -->
       </table>
 
       <hr />

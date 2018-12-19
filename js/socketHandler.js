@@ -13,4 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   socket.on("playerControl", function(msg) {
     videoClass.receiveCMD(msg);
   });
+
+  socket.on("roomChat", function(msg) {
+    console.log(msg)
+  });
 });
