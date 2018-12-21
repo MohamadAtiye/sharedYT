@@ -78,18 +78,33 @@ io.on("connection", function(socket) {
       });
     } else {
       socket.join(newRoom, () => {
+        socket.profile.room = newRoom;
+        let newMsg = {ts:Date.now(),from:"system",msg:socket.profile.name + " has joined this room",color:"red"};
         socket
           .to(newRoom)
-          .emit("roomChat", socket.profile.name + " has joined this room");
+          .emit("roomChat", newMsg);
       });
 
       callback({ ok: true, error: "", newName: socket.profile.name,newRoom:newRoom, id: socket.id });
     }
   });
+
+  socket.on("roomChat", function(msg, callback) {
+    if(!socket.profile || !socket.profile.room) return;
+    msg.ts = Date.now();
+    socket
+    .to(socket.profile.room)
+    .emit("roomChat", msg);
+  });
+
 ////////////////////////////////////////////////////////////////////////////////////////
   socket.on("disconnect", function() {
     let name = "";
-    if(socket.profile) name =socket.profile.name;
+    let room = "";
+    if(socket.profile) {
+      name =socket.profile.name;
+      room = socket.profile.room;
+    }
     console.log(socket.id, name, " disconnected ");
 
     //-- remove name from used names list
@@ -97,6 +112,11 @@ io.on("connection", function(socket) {
     if (index > -1) {
       connectedPlayerNames.splice(index, 1);
     }
+    let newMsg = {ts:Date.now(),from:"system",msg:name + " has left this room",color:"red"};
+
+    io
+    .to(room)
+    .emit("roomChat", newMsg);
 
     //-- delete player socket
     delete connectedPlayerSockets[socket.id];

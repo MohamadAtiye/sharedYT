@@ -13,8 +13,9 @@ function onYouTubeIframeAPIReady() {
   console.log("loadInitVideo");
 
   player = new YT.Player("player", {
-    height: "390",
-    width: "640",
+    // height: "390",
+    // width: "640",
+    width: "100%",
     videoId: INIT_VID_ID,
     events: {
       onReady: onPlayerReady,
